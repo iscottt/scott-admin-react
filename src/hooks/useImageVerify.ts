@@ -1,4 +1,4 @@
-import { SetStateAction, useRef, useState } from 'react';
+import { useRef, useState } from 'react';
 import { useEffect } from 'react';
 
 /**
@@ -8,30 +8,38 @@ import { useEffect } from 'react';
  */
 export default function useImageVerify(width = 120, height = 40) {
   const domRef = useRef<HTMLCanvasElement>(null);
-  const canvanRef = useRef<HTMLCanvasElement>(null);
   const [imgCode, setImageCode] = useState();
-
-  function setImgCode(code: string) {
-    setImageCode(code as unknown as SetStateAction<undefined>);
-  }
-
-  function getImgCode() {
+  // 获取code
+  const getImgCode = () => {
     setImageCode(draw(domRef.current as HTMLCanvasElement, width, height) as any);
-  }
+  };
+  // 监听dom初始化之后调用渲染验证码图形
   useEffect(() => {
     if (domRef?.current) {
       getImgCode();
     }
   }, []);
 
-  return [domRef, imgCode, setImgCode, getImgCode];
+  return [domRef, imgCode, getImgCode];
 }
 
+/**
+ * 获取随机数
+ * @param min 最小值
+ * @param max 最大值
+ * @returns
+ */
 function randomNum(min: number, max: number) {
   const num = Math.floor(Math.random() * (max - min) + min);
   return num;
 }
 
+/**
+ * 获取随机颜色
+ * @param min
+ * @param max
+ * @returns
+ */
 function randomColor(min: number, max: number) {
   const r = randomNum(min, max);
   const g = randomNum(min, max);
@@ -39,11 +47,16 @@ function randomColor(min: number, max: number) {
   return `rgb(${r},${g},${b})`;
 }
 
+/**
+ * 绘制图形
+ * @param dom
+ * @param width
+ * @param height
+ * @returns
+ */
 function draw(dom: HTMLCanvasElement, width: number, height: number) {
   let imgCode = '';
-  console.log(' dom', dom);
   const NUMBER_STRING = '0123456789';
-
   const ctx = dom.getContext('2d');
   if (!ctx) return imgCode;
 

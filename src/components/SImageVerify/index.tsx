@@ -1,20 +1,16 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useEffect } from 'react';
 import useImageVerify from '@/hooks/useImageVerify';
 
 interface ImageVerifyProps {
-  code: string;
   codeChange: (code: string) => void;
 }
 
-const component: React.FC<ImageVerifyProps> = ({ code, codeChange }) => {
-  const [domRef, imgCode, setImgCode, getImgCode] = useImageVerify();
+const SImageVerify: React.FC<ImageVerifyProps> = ({ codeChange }) => {
+  const [domRef, imgCode, getImgCode] = useImageVerify();
   useEffect(() => {
+    // 把code传递给父组件
     codeChange(imgCode as unknown as string);
   }, [imgCode]);
-  return (
-    <div>
-      <canvas ref={domRef as any} width="120" height="40" className="cursor-pointer" onClick={getImgCode as any}></canvas>
-    </div>
-  );
+  return <canvas ref={domRef as any} width="120" height="40" className="cursor-pointer" onClick={getImgCode as any}></canvas>;
 };
-export default component;
+export default SImageVerify;

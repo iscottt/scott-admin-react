@@ -40,7 +40,7 @@ const LoginForm = (props: any) => {
       <Form.Item name="code" rules={[{ required: true, message: '请输入验证码' }]}>
         <div className="w-full flex items-center justify-between">
           <Input className="!rounded-md !flex-1 !mr-2" placeholder="验证码" />
-          <SImageVerify code={verifyCode} codeChange={handleCodeChange} />
+          <SImageVerify codeChange={handleCodeChange} />
         </div>
       </Form.Item>
       <div className="w-full mb-20px flex items-center justify-evenly">
