@@ -1,0 +1,19 @@
+.login-container {
+  @apply relative flex items-center justify-center w-full h-full;
+  background-image: url('@/assets/images/login_bg.svg');
+  background-position: 50%;
+  background-size: 100% 100%;
+  background-size: cover;
+  background-color: #f0f2f5;
+  .login-box {
+    @apply w-400px relative overflow-hidden min-h-400px p-20px box-border bg-white !rounded-10px;
+    .login-info {
+      .title {
+        @apply text-2xl text-dark-50 font-bold;
+      }
+      .desc {
+        @apply w-full text-sm text-right font-bold text-gray-500 my-3;
+      }
+    }
+  }
+}

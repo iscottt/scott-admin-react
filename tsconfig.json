@@ -1,0 +1,25 @@
+{
+  "compilerOptions": {
+    "baseUrl": "./", // 新增：配置 vscode  使用 @提示
+    "paths": {
+      "@": ["src"],
+      "@/*": ["src/*"] // 新增：配置 vscode  使用 @提示
+    },
+    "target": "es5",
+    "lib": ["dom", "dom.iterable", "esnext"],
+    "allowJs": true,
+    "skipLibCheck": true,
+    "esModuleInterop": true,
+    "allowSyntheticDefaultImports": true,
+    "strict": true,
+    "forceConsistentCasingInFileNames": true,
+    "noFallthroughCasesInSwitch": true,
+    "module": "esnext",
+    "moduleResolution": "node",
+    "resolveJsonModule": true,
+    "isolatedModules": true,
+    "noEmit": true,
+    "jsx": "react" // 新增：jsx 编译
+  },
+  "include": ["src"]
+}
