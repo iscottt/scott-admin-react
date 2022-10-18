@@ -49,7 +49,7 @@ const LoginForm = (props: any) => {
         </Button>
       </div>
       <div className="w-full mt-20px text-#999">
-        <div className="mt-3px flex items-center justify-center">
+        <div className="mt-3px flex-center">
           <span className="align-middle ml-3px mr-3px">建议使用</span>
           <img src={chrome} alt="" className="inline-block w-15px" />
           <span className="align-middle ml-3px mr-3px">Chrome、</span>
