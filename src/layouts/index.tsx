@@ -1,13 +1,14 @@
 import { UploadOutlined, UserOutlined, VideoCameraOutlined } from '@ant-design/icons';
-import { Layout, Menu } from 'antd';
 import React, { useState } from 'react';
+import { Outlet } from 'react-router-dom';
+import { Layout } from 'antd';
 import SHeader from './components/SHeader';
 import SiderBar from './components/SiderBar';
-import './styles/layout.less';
-import { Outlet } from 'react-router-dom';
+import './layout.less';
 
-const { Sider, Content } = Layout;
+const { Content } = Layout;
 
+// 菜单数据
 const initialMenus = [
   {
     key: '1',
@@ -27,11 +28,11 @@ const initialMenus = [
 ];
 
 const SLayout: React.FC = () => {
+  // 控制边栏展开与收缩
   const [collapsed, setCollapsed] = useState(false);
-  const [menus, setMenus] = useState(initialMenus);
+  const [menus] = useState(initialMenus);
 
   const collapsedChange = (collapsed: boolean) => {
-    console.log('collapsed', collapsed);
     setCollapsed(collapsed);
   };
 
@@ -41,6 +42,7 @@ const SLayout: React.FC = () => {
       <Layout className="site-layout">
         <SHeader onChange={collapsedChange} />
         <Content className="layout-content">
+          {/* 自动加载对应路由的组件 */}
           <Outlet />
         </Content>
       </Layout>

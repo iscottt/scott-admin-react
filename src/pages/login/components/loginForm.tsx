@@ -1,6 +1,5 @@
-import React, { useRef, useState } from 'react';
-import { Button, Form, Input, message } from 'antd';
-import { useNavigate } from 'react-router-dom';
+import React, { useState } from 'react';
+import { Button, Form, Input } from 'antd';
 import SImageVerify from '@/components/SImageVerify';
 
 import chrome from '@/assets/images/login/chrome.png';
@@ -15,14 +14,13 @@ import { Login } from '@/api/interface';
 const LoginForm = (props: any) => {
   const [form] = Form.useForm();
   const [verifyCode, setVerifyCode] = useState('');
-  const navigate = useNavigate();
   const handleCodeChange = (code: string) => {
-    console.log(code);
+    setVerifyCode(code);
   };
   // 登录
   const onFinish = async (loginForm: Login.ReqLoginForm) => {
-    console.log(loginForm);
-    navigate('/dashboard/dataVisualize');
+    console.log(loginForm, verifyCode);
+    props.onSubmit();
   };
 
   const onFinishFailed = (errorInfo: any) => {

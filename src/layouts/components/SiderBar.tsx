@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React from 'react';
 import { Layout, Menu } from 'antd';
 import { ItemType } from 'antd/lib/menu/hooks/useItems';
 const { Sider } = Layout;
