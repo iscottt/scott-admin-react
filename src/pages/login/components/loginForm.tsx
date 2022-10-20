@@ -9,7 +9,7 @@ import png360 from '@/assets/images/login/360.png';
 import sougou from '@/assets/images/login/sougou.png';
 import qq from '@/assets/images/login/qq.png';
 import fast from '@/assets/images/login/fast.png';
-import { Login } from '@/api/interface';
+import { Login } from '@/service/interface';
 
 const LoginForm = (props: any) => {
   const [form] = Form.useForm();
