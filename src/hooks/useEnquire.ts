@@ -3,10 +3,9 @@ import { EnumDeviceType } from '@/enum';
 import enquireJs from 'enquire.js';
 import appStore from '@/store';
 
-export const AppDeviceEnquire = () => {
+export const useDeviceEnquire = () => {
   const store = useContext(appStore);
   deviceEnquire((deviceType: EnumDeviceType) => {
-    console.log('deviceType', deviceType);
     switch (deviceType) {
       case EnumDeviceType.desktop:
         store.setDeviceType(EnumDeviceType.desktop);
