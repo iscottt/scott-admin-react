@@ -1,5 +1,6 @@
 import { DeviceType } from '@/types';
 import { observable, action, makeObservable } from 'mobx';
+import { createContext } from 'react';
 
 class AppMobx {
   constructor() {
@@ -9,9 +10,9 @@ class AppMobx {
   @observable device = 'desktop';
 
   @action
-  setDevice(device: DeviceType) {
+  setDeviceType(device: DeviceType) {
     this.device = device;
   }
 }
 const appStore = new AppMobx();
-export default appStore;
+export default createContext(appStore); //react-hooks中使用

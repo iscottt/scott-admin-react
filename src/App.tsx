@@ -3,8 +3,10 @@ import { HashRouter } from 'react-router-dom';
 import { ConfigProvider } from 'antd';
 import zhCN from 'antd/lib/locale/zh_CN';
 import Router from '@/router/index';
+import { AppDeviceEnquire } from './core';
 
 const App = (props: any) => {
+  AppDeviceEnquire();
   return (
     <HashRouter>
       <ConfigProvider locale={zhCN}>
