@@ -1,18 +1,14 @@
-import { DeviceType } from '@/types';
-import { observable, action, makeObservable } from 'mobx';
-import { createContext } from 'react';
+import { createContext, useContext } from 'react';
+import AppMobx from './modules/app';
+import UserMobx from './modules/user';
 
-class AppMobx {
-  constructor() {
-    // mobx6.0后的版本都需要手动调用makeObservable(this)，不然会发现数据变了视图不更新
-    makeObservable(this);
-  }
-  @observable device = 'desktop';
+const store = {
+  AppMobx,
+  UserMobx,
+};
 
-  @action
-  setDeviceType(device: DeviceType) {
-    this.device = device;
-  }
-}
-const appStore = new AppMobx();
-export default createContext(appStore); //react-hooks中使用
+const StoreContext = createContext(store);
+
+export const useStore = () => useContext(StoreContext);
+
+export default store;

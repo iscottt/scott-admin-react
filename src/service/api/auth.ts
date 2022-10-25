@@ -1,4 +1,5 @@
 import http from '../httpUtil';
+import { loginProps } from '@/types';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 
@@ -8,12 +9,12 @@ const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
  * @param password
  * @returns
  */
-export function fetchLogin(username: string, password: string) {
+export function fetchLogin(loginUser: loginProps) {
   return http.request(
     {
       url: '/auth/login',
       method: 'POST',
-      params: { username, password },
+      params: loginUser,
     },
     {
       apiUrl,

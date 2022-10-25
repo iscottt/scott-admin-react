@@ -4,7 +4,7 @@ import qs from 'qs';
 import { checkStatus } from './checkStatus';
 import axios, { AxiosResponse } from 'axios';
 import { RequestOptions, Result, ResultEnum } from './types';
-import { message } from 'ant-design-vue';
+import { message } from 'antd';
 import { getToken } from '@/utils';
 import { downloadFile, isString, isObject } from './helper';
 
@@ -60,13 +60,7 @@ const transform: AxiosTransform = {
   },
   // 处理请求数据
   transformRequestData: (res: AxiosResponse<Result>, options: RequestOptions) => {
-    const {
-      isTransformRequestResult,
-      successMessageText,
-      errorMessageText,
-      isDownload,
-      isShowMessage = false,
-    } = options;
+    const { isTransformRequestResult, successMessageText, errorMessageText, isDownload, isShowMessage = false } = options;
     const reject = Promise.reject;
     const { data } = res;
     const { retCode, retData, retMessage } = data;

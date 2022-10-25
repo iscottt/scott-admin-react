@@ -1,6 +1,6 @@
 import http from '../httpUtil';
 import { RoleApi } from '../interface';
-import { HttpUtils, TableApi } from '../interface/request';
+import { TableApi } from '../interface/request';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 
