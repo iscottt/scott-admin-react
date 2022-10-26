@@ -10,8 +10,8 @@ class UserMobx {
 
   loginAction = flow(function* (loginUser: loginProps) {
     try {
-      // const result = yield fetchLogin(loginUser);
-      // console.log('result', result);
+      const result = yield fetchLogin(loginUser);
+      console.log('result', result);
     } catch (error) {}
   }).bind(this);
 }

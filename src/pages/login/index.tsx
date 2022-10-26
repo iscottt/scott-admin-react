@@ -1,18 +1,23 @@
 import SLoading from '@/components/SLoading';
+import { Login } from '@/service/interface';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from './components/loginForm';
+import { useStore } from '@/store';
 import './index.less';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = () => {
+  const store = useStore();
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const onSubmit = () => {
+  const onSubmit = async (loginForm: Login.ReqLoginForm) => {
     setLoading(true);
-    setTimeout(() => {
-      setLoading(false);
+    try {
+      await store.UserMobx.loginAction(loginForm);
       navigate('/dashboard/dataVisualize');
-    }, 1500);
+    } finally {
+      setLoading(false);
+    }
   };
   return (
     <div className="login-container">
@@ -27,4 +32,4 @@ const Login: React.FC = () => {
     </div>
   );
 };
-export default Login;
+export default LoginPage;

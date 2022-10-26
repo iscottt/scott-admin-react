@@ -1,9 +1,9 @@
 import { clearLocal } from '@/utils';
 import { message, Modal } from 'antd';
 import { useNavigate } from 'react-router-dom';
-const navigate = useNavigate();
 
 export function checkStatus(status: number, msg: string): void {
+  const navigate = useNavigate();
   switch (status) {
     case 400:
       message.error(`${msg}`);
