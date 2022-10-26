@@ -14,7 +14,7 @@ const LoginPage: React.FC = () => {
     setLoading(true);
     try {
       await store.UserMobx.loginAction(loginForm);
-      navigate('/dashboard/dataVisualize');
+      // navigate('/dashboard/dataVisualize');
     } finally {
       setLoading(false);
     }

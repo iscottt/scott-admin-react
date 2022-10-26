@@ -1,19 +1,33 @@
 import { fetchLogin } from '@/service';
 import { loginProps } from '@/types';
-import { flow, makeObservable, observable } from 'mobx';
+import { action, flow, makeObservable, observable } from 'mobx';
+import { UserApi } from '@/service/interface';
+import { setToken, setRefreshToken } from '@/utils';
 
 class UserMobx {
+  _self = this;
   constructor() {
     makeObservable(this);
   }
   @observable userInfo = {};
 
-  loginAction = flow(function* (loginUser: loginProps) {
+  // 登录获取到token
+  @action
+  async loginAction(loginUser: loginProps) {
     try {
-      const result = yield fetchLogin(loginUser);
-      console.log('result', result);
+      const result = await fetchLogin(loginUser);
+      this.loginByToken(result.retData);
     } catch (error) {}
-  }).bind(this);
+  }
+
+  // 根据token获取用户信息
+  @action
+  async loginByToken(backendToken: UserApi.ResLogin) {
+    // 先把token存储到缓存中
+    const { token, refreshToken } = backendToken;
+    setToken(token);
+    setRefreshToken(refreshToken);
+  }
 }
 
 export default new UserMobx();

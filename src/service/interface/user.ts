@@ -14,6 +14,10 @@ export namespace UserApi {
     status: number | string;
     roleIds: string;
   }
+  export interface ResLogin {
+    token: string;
+    refreshToken: string;
+  }
   export interface ResUser {
     id?: number;
     username?: string;

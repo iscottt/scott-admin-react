@@ -23,15 +23,18 @@ const LoginForm: React.FC<LoginFormProps> = (props: any) => {
     setVerifyCode(code);
   };
   // 登录
-  const onFinish = useCallback(async (loginForm: Login.ReqLoginForm) => {
-    // 先确定验证码正确再提交
-    if (loginForm.code !== verifyCode) {
-      (SImageVerifyRef.current as any).refreshCode();
-      message.error('验证码错误', 0);
-      return;
-    }
-    props.onSubmit(loginForm);
-  }, []);
+  const onFinish = useCallback(
+    (loginForm: Login.ReqLoginForm) => {
+      // 先确定验证码正确再提交
+      if (loginForm.code !== verifyCode) {
+        (SImageVerifyRef.current as any).refreshCode();
+        message.error('验证码错误', 0);
+        return;
+      }
+      props.onSubmit(loginForm);
+    },
+    [verifyCode]
+  );
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
