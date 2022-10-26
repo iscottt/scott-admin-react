@@ -1,23 +1,22 @@
 import React, { useContext } from 'react';
 import { EnumDeviceType } from '@/enum';
 import enquireJs from 'enquire.js';
-import { useStore } from '@/store';
+import appStore from '@/store/modules/app';
 
 export const useDeviceEnquire = () => {
-  const { AppMobx } = useStore();
   deviceEnquire((deviceType: EnumDeviceType) => {
     switch (deviceType) {
       case EnumDeviceType.desktop:
-        AppMobx.setDeviceType(EnumDeviceType.desktop);
+        appStore.setDeviceType(EnumDeviceType.desktop);
         break;
       case EnumDeviceType.tablet:
-        AppMobx.setDeviceType(EnumDeviceType.tablet);
+        appStore.setDeviceType(EnumDeviceType.tablet);
         break;
       case EnumDeviceType.mobile:
-        AppMobx.setDeviceType(EnumDeviceType.mobile);
+        appStore.setDeviceType(EnumDeviceType.mobile);
         break;
       default:
-        AppMobx.setDeviceType(EnumDeviceType.desktop);
+        appStore.setDeviceType(EnumDeviceType.desktop);
         break;
     }
   });

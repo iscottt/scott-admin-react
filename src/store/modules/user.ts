@@ -1,6 +1,6 @@
 import { fetchLogin } from '@/service';
 import { loginProps } from '@/types';
-import { observable, makeObservable, flow } from 'mobx';
+import { flow, makeObservable, observable } from 'mobx';
 
 class UserMobx {
   constructor() {
@@ -15,4 +15,5 @@ class UserMobx {
     } catch (error) {}
   }).bind(this);
 }
+
 export default new UserMobx();

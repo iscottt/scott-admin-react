@@ -12,8 +12,16 @@ export namespace UserApi {
     password: string;
     email: string;
     status: number | string;
-    createTime: string;
-    updateTime: string;
     roleIds: string;
+  }
+  export interface ResUser {
+    id?: number;
+    username?: string;
+    password?: string;
+    email?: string;
+    status?: number | string;
+    createTime?: string;
+    updateTime?: string;
+    roleIds?: string;
   }
 }
