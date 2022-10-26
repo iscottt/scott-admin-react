@@ -1,6 +1,5 @@
 import React, { useState, useContext } from 'react';
 import { Button, Form, Input } from 'antd';
-import { useStore } from '@/store';
 import SImageVerify from '@/components/SImageVerify';
 import chrome from '@/assets/images/login/chrome.png';
 import firefox from '@/assets/images/login/firefox.png';
@@ -10,11 +9,12 @@ import sougou from '@/assets/images/login/sougou.png';
 import qq from '@/assets/images/login/qq.png';
 import fast from '@/assets/images/login/fast.png';
 import { Login } from '@/service/interface';
-import { observer } from 'mobx-react-lite';
 
-const LoginForm: React.FC = (props: any) => {
-  const { UserMobx } = useStore();
-  console.log('UserMobx', UserMobx);
+interface LoginFormProps {
+  onSubmit: (loginForm: Login.ReqLoginForm) => void;
+}
+
+const LoginForm: React.FC<LoginFormProps> = (props: any) => {
   const [form] = Form.useForm();
   const [verifyCode, setVerifyCode] = useState('');
   const handleCodeChange = (code: string) => {
@@ -23,8 +23,7 @@ const LoginForm: React.FC = (props: any) => {
   // 登录
   const onFinish = async (loginForm: Login.ReqLoginForm) => {
     console.log(loginForm, verifyCode);
-    UserMobx.loginAction(loginForm);
-    props.onSubmit();
+    props.onSubmit(loginForm);
   };
 
   const onFinishFailed = (errorInfo: any) => {

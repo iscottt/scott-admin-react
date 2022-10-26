@@ -2,13 +2,17 @@ import SLoading from '@/components/SLoading';
 import React, { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import LoginForm from './components/loginForm';
+import userStore from '@/store/modules/user';
+import { observer } from 'mobx-react-lite';
+import { Login } from '@/service/interface';
 import './index.less';
 
-const Login: React.FC = () => {
+const LoginPage: React.FC = observer(() => {
   const [loading, setLoading] = useState(false);
   const navigate = useNavigate();
-  const onSubmit = () => {
+  const onSubmit = (loginForm: Login.ReqLoginForm) => {
     setLoading(true);
+    userStore.loginAction(loginForm);
     setTimeout(() => {
       setLoading(false);
       navigate('/dashboard/dataVisualize');
@@ -26,5 +30,5 @@ const Login: React.FC = () => {
       </div>
     </div>
   );
-};
-export default Login;
+});
+export default LoginPage;

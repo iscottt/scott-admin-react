@@ -1,14 +1,12 @@
-import { createContext, useContext } from 'react';
-import AppMobx from './modules/app';
-import UserMobx from './modules/user';
+import { createContext } from 'react';
+import appStore from './modules/app';
+import userStore from './modules/user';
+import { Stores } from './types';
 
-const store = {
-  AppMobx,
-  UserMobx,
-};
+export const stores = Object.freeze<Stores>({
+  appStore,
+  userStore,
+});
 
-const StoreContext = createContext(store);
-
-export const useStore = () => useContext(StoreContext);
-
-export default store;
+export const storeContext = createContext(stores);
+export const StoresProvider = storeContext.Provider;

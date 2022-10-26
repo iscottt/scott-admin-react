@@ -1,15 +1,18 @@
 import { DeviceType } from '@/types';
-import { observable, action, makeObservable } from 'mobx';
-class AppMobx {
-  constructor() {
-    // mobx6.0后的版本都需要手动调用makeObservable(this)，不然会发现数据变了视图不更新
-    makeObservable(this);
-  }
-  @observable device = 'desktop';
+import { makeAutoObservable } from 'mobx';
 
-  @action
-  setDeviceType(device: DeviceType) {
-    this.device = device;
-  }
+export interface AppStore {
+  device: DeviceType;
+  setDeviceType: (device: DeviceType) => void;
 }
-export default new AppMobx();
+
+const appStore = makeAutoObservable<AppStore>({
+  device: 'desktop',
+
+  // 设置暗黑模式
+  setDeviceType(device: DeviceType): void {
+    this.device = device;
+  },
+});
+
+export default appStore;

@@ -1,18 +1,24 @@
 import { fetchLogin } from '@/service';
+import { UserApi } from '@/service/interface';
 import { loginProps } from '@/types';
-import { observable, makeObservable, flow } from 'mobx';
+import axios from 'axios';
+import { makeAutoObservable } from 'mobx';
 
-class UserMobx {
-  constructor() {
-    makeObservable(this);
-  }
-  @observable userInfo = {};
-
-  loginAction = flow(function* (loginUser: loginProps) {
-    try {
-      // const result = yield fetchLogin(loginUser);
-      // console.log('result', result);
-    } catch (error) {}
-  }).bind(this);
+export interface UserStore {
+  userInfo: UserApi.ResUser;
+  loginAction: (loginUser: loginProps) => void;
 }
-export default new UserMobx();
+
+const userStore = makeAutoObservable<UserStore>({
+  userInfo: {},
+
+  // 设置暗黑模式
+  async loginAction(loginUser: loginProps): Promise<void> {
+    // const result = await fetchLogin(loginUser);
+    axios.post('http://localhost:7345/api/auth/getLoginUser', loginUser).then((result) => {
+      console.log('result', result);
+    });
+  },
+});
+
+export default userStore;
