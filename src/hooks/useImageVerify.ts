@@ -20,7 +20,7 @@ export default function useImageVerify(width = 120, height = 40) {
     }
   }, []);
 
-  return [domRef, imgCode, getImgCode];
+  return [domRef, imgCode, getImgCode, setImageCode];
 }
 
 /**

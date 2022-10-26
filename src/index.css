@@ -77,3 +77,7 @@ button:focus-visible {
   font-family: BIN;
   src: url(@/assets/fonts/din-bold.otf);
 }
+
+.ant-message .anticon {
+  top: -3px !important;
+}

@@ -1,5 +1,5 @@
-import React, { useState, useContext } from 'react';
-import { Button, Form, Input } from 'antd';
+import React, { useState, useContext, useRef, useCallback } from 'react';
+import { Button, Form, Input, message } from 'antd';
 import SImageVerify from '@/components/SImageVerify';
 import chrome from '@/assets/images/login/chrome.png';
 import firefox from '@/assets/images/login/firefox.png';
@@ -9,6 +9,7 @@ import sougou from '@/assets/images/login/sougou.png';
 import qq from '@/assets/images/login/qq.png';
 import fast from '@/assets/images/login/fast.png';
 import { Login } from '@/service/interface';
+import useImageVerify from '@/hooks/useImageVerify';
 
 export interface LoginFormProps {
   onSubmit: (loginForm: Login.ReqLoginForm) => void;
@@ -16,15 +17,21 @@ export interface LoginFormProps {
 
 const LoginForm: React.FC<LoginFormProps> = (props: any) => {
   const [form] = Form.useForm();
+  const SImageVerifyRef = useRef(null);
   const [verifyCode, setVerifyCode] = useState('');
   const handleCodeChange = (code: string) => {
     setVerifyCode(code);
   };
   // 登录
-  const onFinish = async (loginForm: Login.ReqLoginForm) => {
+  const onFinish = useCallback(async (loginForm: Login.ReqLoginForm) => {
     // 先确定验证码正确再提交
+    if (loginForm.code !== verifyCode) {
+      (SImageVerifyRef.current as any).refreshCode();
+      message.error('验证码错误', 0);
+      return;
+    }
     props.onSubmit(loginForm);
-  };
+  }, []);
 
   const onFinishFailed = (errorInfo: any) => {
     console.log('Failed:', errorInfo);
@@ -41,7 +48,7 @@ const LoginForm: React.FC<LoginFormProps> = (props: any) => {
       <Form.Item name="code" rules={[{ required: true, message: '请输入验证码' }]}>
         <div className="w-full flex items-center justify-between">
           <Input className="!rounded-md !flex-1 !mr-2" placeholder="验证码" />
-          <SImageVerify codeChange={handleCodeChange} />
+          <SImageVerify ref={SImageVerifyRef} codeChange={handleCodeChange} />
         </div>
       </Form.Item>
       <div className="w-full mb-20px flex items-center justify-evenly">
