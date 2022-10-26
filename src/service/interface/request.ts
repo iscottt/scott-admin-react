@@ -1,6 +1,6 @@
 export namespace HttpUtils {
-  export interface ReqData {
-    retData: any;
+  export interface ResData<T> {
+    retData: T;
     retCode: number | string;
   }
 }

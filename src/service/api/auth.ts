@@ -1,6 +1,7 @@
 import http from '../httpUtil';
 import { loginProps } from '@/types';
 import { UserApi } from '@/service/interface';
+import { HttpUtils } from '../interface/request';
 const isDev = import.meta.env.DEV;
 const apiUrl = isDev ? 'http://localhost:7345/api' : '/api';
 
@@ -25,8 +26,8 @@ export function fetchLogin(loginUser: loginProps) {
 }
 
 /** 获取用户信息 */
-export function fetchUserInfo(): Promise<UserApi.ResUser> {
-  return http.request(
+export function fetchUserInfo() {
+  return http.request<HttpUtils.ResData<UserApi.ResUser>>(
     {
       url: '/auth/getLoginUser',
       method: 'GET',
